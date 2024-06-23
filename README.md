@@ -14,7 +14,7 @@ OpenSSL v1.1.1f or LibreSSL 3.3.6
 git clone https://github.com/darwincastro/mTLS_c9800_and_collector_certs.git
 cd mTLS_c9800_and_collector_certs
 ```
-2. Update `collector_extfile.cnf
+2. Update `collector_extfile.cnf`
 
 This script will append Subject Alternative Names (SAN) for the Telegraf server, which helps with WLC validation. Users need to update the collector_extfile.cnf file accordingly. You can add or remove DNS names and IP addresses as needed.
 
@@ -35,7 +35,10 @@ IP.1 = 192.168.10.1
 IP.2 = 192.168.10.2
 IP.3 = 192.168.10.3
 ```
-Update or delete the entries in `collector_extfile.cnf` based on your requirements. Each subjectAltName can be on a new line for better readability.
+***
+> **Note:**
+>Update or delete the entries in `collector_extfile.cnf` based on your requirements. Each subjectAltName can be on a new line for better readability.
+***
 
 3. Run the script:
 
@@ -72,12 +75,16 @@ crypto pki import <trustpoint name> pem terminal password cisco
  <paste contents of wlc.pem>
 ```
 
-The script also generates a PKCS#12 file named WLC.pfx, containing the WLC key, WLC certificate, and CA certificate.
+***
+> **Note:**
+>The script also generates a PKCS#12 file named WLC.pfx, containing the WLC key, WLC certificate, and CA certificate.
+***
 
-You Upload the file WLC.pfx to `bootflash:` and run:
+Upload the file WLC.pfx to `bootflash:` and run:
 
+```sh
 crypto pki import <trustpoint> pkcs12 bootflash:WLC.pfx password <securePassword> 
-
+```
 ### Collector Certs in Telegraf
 
 Move the generated certs to the appropriate directory for Telegraf:
@@ -94,5 +101,8 @@ mv collector.key /etc/telegraf/certs/collector.key
 > - Ensure you have the necessary permissions to move and access these files.
 ***
 
-License
-This project is licensed under the MIT License.
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
+
+***

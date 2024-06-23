@@ -1,0 +1,9 @@
+subjectAltName = @alt_names
+
+[alt_names]
+DNS.1 = collector1.example.com
+DNS.2 = collector2.example.com
+DNS.3 = collector3.example.com
+IP.1 = 192.168.10.1
+IP.2 = 192.168.10.2
+IP.3 = 192.168.10.3

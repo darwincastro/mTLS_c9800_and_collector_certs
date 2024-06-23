@@ -5,7 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5d53ea94-bd19-412b-baab-fe12ee9d41fe" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/examples/image5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/examples/image6.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/image2.png" beforeDir="false" afterPath="$PROJECT_DIR$/examples/image2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/image3.png" beforeDir="false" afterPath="$PROJECT_DIR$/examples/image3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/image4.png" beforeDir="false" afterPath="$PROJECT_DIR$/examples/image4.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mkcerts.sh" beforeDir="false" afterPath="$PROJECT_DIR$/mkcerts.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,22 +22,22 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 3
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="2iGivsdQWw6aR2ZRJsKjnTuxjef" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "/Users/darcastr/Scripting_and_programming/GitHub-Repositories/mTLS_c9800_and_collector_certs",
-    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.Console Font"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/darcastr/Scripting_and_programming/GitHub-Repositories/mTLS_c9800_and_collector_certs&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.Console Font&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/examples" />

@@ -51,18 +51,28 @@ The script checks if OpenSSL is installed on your system. If not, it exits with 
 
 ![cloning repository](./examples/image1.png)
 
-4. The first block of information belongs to the CA, use any information that you like, and make sure to use your domain name under the "common name" section, like; "example.com"
+4. The first block of information belongs to the CA that issues the WLC certificate, use any information that you like, and make sure to use your domain name under the "common name" section, like; "cx.example.com"
 
-![CA Information](./examples/image2.png)
+![CA Information_WLC](./examples/image2.png)
 
 5. The second block belongs to the Cisco C9800 controller
 
 ![WLC Information](./examples/image3.png)
 
-5. The third block belongs to the Telegraf server
+6. The Fourth block belongs to the CA that issues the Telegraf certificate, use any information that you like, and make sure to use your domain name under the "common name" section, like; "example.com"
 
-![Telegraf Information](./examples/image4.png)
+![CA Information_collector](./examples/image4.png)
+
+7. The Fifth block belongs to the Telegraf server
+
+![Telegraf Information](./examples/image5.png)
 ***
+
+## Output
+
+The following represents the content decoded of `collector.pem` we included DNS addresses and IP addresses
+
+![collector_,pem_decoded](./examples/image6.png)
 
 ## Configure the Trustpoint in Your C9800
 
@@ -80,16 +90,36 @@ crypto pki import <trustpoint name> pem terminal password cisco
 >The script also generates a PKCS#12 file named WLC.pfx, containing the WLC key, WLC certificate, and CA certificate.
 ***
 
+### 1st Trustpoint
 Upload the file WLC.pfx to `bootflash:` and run:
 
 ```sh
-crypto pki import <trustpoint> pkcs12 bootflash:WLC.pfx password <securePassword> 
+crypto pki import id1 pkcs12 bootflash:WLC.pfx password cisco 
 ```
+
+### 2nd 
+
+Where the certificates are placed do cat `ca_collector.pem` and copy the certificate's content.
+In the WLC terminal run:
+
+```sh
+config t
+crypto pki trustpoint ca1
+enrollment terminal
+revocation-check none
+exit
+```
+
+```sh
+crypto pki authenticate ca1
+<Paste ca_collector.pem content>
+```
+
 ### Collector Certs in Telegraf
 
 Move the generated certs to the appropriate directory for Telegraf:
 ```sh
-mv ca.pem /etc/telegraf/certs/ca.pem
+mv ca_wlc.pem /etc/telegraf/certs/ca_wlc.pem
 mv collector.pem /etc/telegraf/certs/collector.pem
 mv collector.key /etc/telegraf/certs/collector.key
 ```

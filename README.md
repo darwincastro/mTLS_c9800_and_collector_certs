@@ -1,56 +1,67 @@
-# Certificates Generation Script
+# OpenSSL Certificate Generation Script
 
-This script generates a Certificate Authority (CA) and two device certificates (WLC and RADSEC Server certificate) signed by the CA. The certificates are used for securing communication between network devices and FreeRADIUS server.
+This script generates a Certificate Authority (CA) and two device certificates for Mutual-TLS (mTLS) exchange between a WLC and Telegraf server(s) both certificates are signed by the same CA. The certificates are used for securing communication between network devices and a Telegraf server.
 
 ## Prerequisites
 
 OpenSSL v1.1.1f or LibreSSL 3.3.6
-
+***
 ## Steps to generate the certificate bundle:
 
 1. Clone the repository, and go to the directory.
 
 ```sh
-git clone https://github.com/darwincastro/c9800_and_radsec_certs.git
+git clone https://github.com/darwincastro/mTLS_c9800_and_collector_certs.git
+cd mTLS_c9800_and_collector_certs
+```
+2. Update `collector_extfile.cnf
+
+This script will append Subject Alternative Names (SAN) for the Telegraf server, which helps with WLC validation. Users need to update the collector_extfile.cnf file accordingly. You can add or remove DNS names and IP addresses as needed.
+
+Example;
+
+```sh
+nano collector_extfile.cnf
 ```
 
 ```sh
-cd c9800_and_radsec_certs
+subjectAltName = @alt_names
+
+[alt_names]
+DNS.1 = collector1.example.com
+DNS.2 = collector2.example.com
+DNS.3 = collector3.example.com
+IP.1 = 192.168.10.1
+IP.2 = 192.168.10.2
+IP.3 = 192.168.10.3
 ```
-2. Run the script:
+Update or delete the entries in `collector_extfile.cnf` based on your requirements. Each subjectAltName can be on a new line for better readability.
+
+3. Run the script:
 
 ```sh
 ./mkcerts.sh
 ```
+The script checks if OpenSSL is installed on your system. If not, it exits with an error message.
 
 **The output should look like the following:**
 
-![cloning repository](./examples/Image1.png)
+![cloning repository](./examples/image1.png)
 
-3. The first block of information belongs to the CA, use any information that you like, and make sure to use your domain name under the "common name" section, like; "example.com"
-
-> [!NOTE]  
-> The script supports one hostname, and one IP address, if you are planning to use multiple IPs & names feel free to modify the code at your convenience.
+4. The first block of information belongs to the CA, use any information that you like, and make sure to use your domain name under the "common name" section, like; "example.com"
 
 ![CA Information](./examples/image2.png)
 
-4. The second block belongs to the Cisco C9800 controller
-
-> [!TIP]
-> Under "FQDN input" Copy and paste the FQDN you just added.
+5. The second block belongs to the Cisco C9800 controller
 
 ![WLC Information](./examples/image3.png)
 
-5. The third block belongs to the RADSec server
+5. The third block belongs to the Telegraf server
 
-> [!TIP]
-> Under "FQDN input" Copy and paste the FQDN you just added.
+![Telegraf Information](./examples/image4.png)
+***
 
-![RADS Information](./examples/image4.png)
-
-## Example Output
-
-### Configure the Trustpoint in Your Network WLC
+## Configure the Trustpoint in Your C9800
 
 Use the following commands to configure the trustpoint:
 
@@ -61,27 +72,27 @@ crypto pki import <trustpoint name> pem terminal password cisco
  <paste contents of wlc.pem>
 ```
 
-### Configure the RADSEC Certificates in FreeRADIUS
+The script also generates a PKCS#12 file named WLC.pfx, containing the WLC key, WLC certificate, and CA certificate.
 
-Move the generated certificates to the FreeRADIUS certificates directory:
+You Upload the file WLC.pfx to `bootflash:` and run:
 
+crypto pki import <trustpoint> pkcs12 bootflash:WLC.pfx password <securePassword> 
+
+### Collector Certs in Telegraf
+
+Move the generated certs to the appropriate directory for Telegraf:
 ```sh
-mv ca.pem /etc/freeradius/3.0/certs/ca.pem
-mv radsec.pem /etc/freeradius/3.0/certs/radsec.pem
-mv radsec.key /etc/freeradius/3.0/certs/radsec.key
+mv ca.pem /etc/telegraf/certs/ca.pem
+mv collector.pem /etc/telegraf/certs/collector.pem
+mv collector.key /etc/telegraf/certs/collector.key
 ```
-
-### Bonus: Create a PKCS#12 File
-
-For version 17.12.1 or above :
-Create a PKCS#12 file for your WLC, use the following command in the same working directory:
-
-```sh
-openssl pkcs12 -export -out radsec_chain.pfx -inkey wlc.key -in wlc.pem -certfile ca.pem
-```
-
-This command creates a PKCS#12 file named radsec_chain.pfx, containing the WLC key, WLC certificate, and CA certificate.
-
+***
 > [!IMPORTANT]  
 > - Ensure the .ca.cnf and .device.cnf configuration files are correctly set up and present in the same directory as the script.
 > - The script assumes the password specified in the .env file is cisco. Adjust the password as needed.
+> - Ensure you have the necessary permissions to move and access these files.
+> - Ensure you have the necessary permissions to move and access these files.
+***
+
+License
+This project is licensed under the MIT License.

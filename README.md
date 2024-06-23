@@ -128,7 +128,6 @@ mv collector.key /etc/telegraf/certs/collector.key
 > - Ensure the .ca.cnf and .device.cnf configuration files are correctly set up and present in the same directory as the script.
 > - The script assumes the password specified in the .env file is cisco. Adjust the password as needed.
 > - Ensure you have the necessary permissions to move and access these files.
-> - Ensure you have the necessary permissions to move and access these files.
 ***
 
 ## License

@@ -5,14 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5d53ea94-bd19-412b-baab-fe12ee9d41fe" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/examples/image5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/examples/image6.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/image2.png" beforeDir="false" afterPath="$PROJECT_DIR$/examples/image2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/image3.png" beforeDir="false" afterPath="$PROJECT_DIR$/examples/image3.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/image4.png" beforeDir="false" afterPath="$PROJECT_DIR$/examples/image4.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mkcerts.sh" beforeDir="false" afterPath="$PROJECT_DIR$/mkcerts.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

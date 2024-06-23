@@ -1,7 +1,7 @@
 # OpenSSL Certificate Generation Script
 
 This script generates a Certificate Authority (CA) and two device certificates for Mutual-TLS (mTLS) exchange between a WLC and Telegraf server(s) both certificates are signed by the same CA. The certificates are used for securing communication between network devices and a Telegraf server.
-
+***
 ## Prerequisites
 
 OpenSSL v1.1.1f or LibreSSL 3.3.6
